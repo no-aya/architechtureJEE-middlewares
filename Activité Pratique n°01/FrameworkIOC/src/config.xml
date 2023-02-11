@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<beans>
+    <bean>
+        <id>dao</id>
+        <className>enset.ext.DaoImplVWS</className>
+    </bean>
+    <bean>
+        <id>metier</id>
+        <className>enset.metier.MetierImpl</className>
+        <property>
+            <name>Dao</name>
+            <ref>dao</ref>
+        </property>
+    </bean>
+</beans>
