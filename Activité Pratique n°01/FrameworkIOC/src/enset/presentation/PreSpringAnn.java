@@ -8,5 +8,6 @@ public class PreSpringAnn {
         ContextAnn context = new ContextAnn("enset.metier","enset.dao");
         IMetier metier = (IMetier) context.getBean("metier");
         System.out.println(metier.calcul());
+        //System.out.println(metier.calcul());
 }
 }
