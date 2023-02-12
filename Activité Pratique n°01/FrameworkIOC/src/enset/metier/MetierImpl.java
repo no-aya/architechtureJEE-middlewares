@@ -9,6 +9,10 @@ public class MetierImpl implements IMetier {
 
 
     public IDao dao; //Couplage faible
+    @Autowired
+    public void setDao(IDao dao) {
+        this.dao = dao;
+    }
 
     //Injection par constructeur
     /*public MetierImpl(IDao dao) {
@@ -23,8 +27,5 @@ public class MetierImpl implements IMetier {
     }
 
     // Injection dans la variable dao un objet d'une classe qui implémente l'interface IDao
-    @Autowired
-    public void setDao(IDao dao) {
-        this.dao = dao;
-    }
+
 }

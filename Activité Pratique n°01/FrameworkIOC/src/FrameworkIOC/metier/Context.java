@@ -20,9 +20,8 @@ public class Context implements IContext {
 
 
 
-
+    @Override
     public Object getBean(String id) {
-
             for (Bean bean : beanList) {
                 if (bean.getId().equals(id)) {
                     try {

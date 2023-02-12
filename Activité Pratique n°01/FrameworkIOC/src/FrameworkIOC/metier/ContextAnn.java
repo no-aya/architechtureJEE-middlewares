@@ -9,13 +9,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ContextAnn extends Context{
     ArrayList<String> packages = new ArrayList<>();
-    Context context = new Context();
-    List<Bean> beanList = new ArrayList<>();
     public ContextAnn(String... packages) {
         for (String pack : packages) {
             this.packages.add(pack);
@@ -80,22 +77,6 @@ public class ContextAnn extends Context{
             }
         }
     }
-    public Object getBean(String id)  {
-        for (Bean bean : beanList) {
-            if (bean.getId().equals(id)) {
-                try {
-                    return beanFactory(bean);
-                } catch (InstantiationException e) {
-                    throw new RuntimeException(e);
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        return null;
 
-    }
 
 }
