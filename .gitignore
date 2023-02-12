@@ -60,6 +60,7 @@ cmake-build-*/
 **/.idea/sonarlint/
 
 #Documentation
+Documentation/
 *.mdj
 *.docx
 *.pdf
