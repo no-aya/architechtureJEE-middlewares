@@ -3,7 +3,8 @@
 ---
 Dans cette partie, on cherche à développer un Framework qui permettra au développeur de faire l’injection des dépendances.
 La structure de nos classes seront comme suivant :
-![](.\annexes\classes.png)
+![](annexes/classes.png)
+
 ## Entités
 On utilisera la dépendance JAXB pour cette partie.
 Dans le package dao, on définit les entités à extraire
@@ -92,7 +93,7 @@ Pour ceci, on adopte la structure du fichier XML suivante :
 </beans>
 ```
 Voici le processus d'extraction des données
-![](.\annexes\ContextXml.png)
+![](annexes/ContextXml.png)
 
 ### Class ContextXML
 ```java
