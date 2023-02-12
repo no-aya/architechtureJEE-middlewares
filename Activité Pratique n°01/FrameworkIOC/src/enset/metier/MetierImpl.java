@@ -1,7 +1,10 @@
 package enset.metier;
 
+import FrameworkIOC.dao.Autowired;
+import FrameworkIOC.dao.Service;
 import enset.dao.IDao;
 
+@Service("metier")
 public class MetierImpl implements IMetier {
 
 
@@ -20,7 +23,8 @@ public class MetierImpl implements IMetier {
     }
 
     // Injection dans la variable dao un objet d'une classe qui implémente l'interface IDao
-    /*public void setDao(IDao dao) {
+    @Autowired
+    public void setDao(IDao dao) {
         this.dao = dao;
-    }*/
+    }
 }

@@ -1,5 +1,8 @@
 package enset.dao;
 
+import FrameworkIOC.dao.Service;
+
+
 public class DaoImpl2 implements IDao{
     @Override
     public double getData() {
