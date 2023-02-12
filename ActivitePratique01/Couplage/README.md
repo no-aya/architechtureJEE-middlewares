@@ -1,6 +1,7 @@
 # Partie 1 : Application du support et vidéo
 ## 1.	Schématisation du problème
 On cherche à réaliser le schéma suivant :
+
 ![](annexes/Picture1.png)
 
 ## 2.	Couche DAO
