@@ -20,7 +20,6 @@ public class MyTelnetClient {
                     String response;
                     while((response= br.readLine())!=null){
                         System.out.println(response);
-
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);

@@ -3,8 +3,6 @@ package ma.enset.dao;
 
 public class Client {
     private String id;
-    // TODO:
-    //  Pour s'assurer qu'il n'y aura pas de collision d'adresse on peut les stocker dans une BD
     private String name;
 
     //Generate ID
