@@ -13,7 +13,6 @@ public class MyTelnetClient {
             BufferedReader br = new BufferedReader(isr);
             OutputStream os = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(os,true);
-            System.out.print("Enter your name: ");
 
             new Thread(()->{
                 try {

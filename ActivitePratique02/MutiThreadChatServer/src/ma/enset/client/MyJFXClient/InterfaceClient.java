@@ -38,51 +38,70 @@ public class InterfaceClient implements Initializable {
             try {
                 client = new Client(new Socket("localhost", 1234));
                 System.out.println("Client connected to server");
-                //client.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            vbox_message.heightProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    conversation_main.setVvalue((Double) newValue);
-                }
-            });
+            vbox_message.heightProperty().addListener((observable, oldValue, newValue) ->
+                    conversation_main.setVvalue((Double) newValue));
             client.receiveMessage(vbox_message);
+
+
             btn_send.setOnAction(event -> {
                 String message = txt_message.getText();
                 if (!message.isEmpty()) {
                     client.sendMessageToServer(message);
-
+                    if (message.contains("=>")) {
+                        String[] split = message.split("=>",2);
+                        message = split[1] + " (to" + split[0]+")";
+                    }
                     HBox hBox = new HBox();
                     hBox.setAlignment(Pos.CENTER_RIGHT);
                     hBox.setPadding(new Insets(5, 5, 5, 10));
                     TextFlow textFlow = new TextFlow();
-                    textFlow.setStyle("-fx-color: rgb(259,242,255); " +
+                    textFlow.setStyle("-fx-color: #000000FF; " +
                             "-fx-background-radius: 20px; " +
-                            "-fx-background-color: rgb(15,125,242);");
+                            "-fx-background-color: rgb(189,190,190);");
                     textFlow.setPadding(new Insets(5, 10, 5, 10));
                     Text text = new Text(message);
                     text.setFill(Color.color(0.934,0.945,0.966));
                     vbox_message.getChildren().add(hBox);
-
-                    client.sendMessageToServer(message);
+                    hBox.getChildren().add(textFlow);
+                    textFlow.getChildren().add(text);
                     txt_message.clear();
                 }
             });
+    }
+    public static void addTitle(String messageToServer, VBox vbox){
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(5, 5, 5, 10));
+        TextFlow textFlow = new TextFlow();
+        textFlow.setStyle("-fx-color: rgb(0,0,0); " +
+                "-fx-font-weight: bolder;");
+        textFlow.setPadding(new Insets(5, 10, 5, 10));
+        Text text = new Text(messageToServer);
+        textFlow.getChildren().add(text);
+        hBox.getChildren().add(textFlow);
+        Platform.runLater(() -> vbox.getChildren().add(hBox));
     }
     public static void addLabel(String messageToServer, VBox vbox){
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setPadding(new Insets(5, 5, 5, 10));
 
+        String[] words = messageToServer.split(": ",2);
+
         TextFlow textFlow = new TextFlow();
         textFlow.setStyle("-fx-color: rgb(259,242,255); " +
                 "-fx-background-radius: 20px; " +
                 "-fx-background-color: rgb(15,125,242);");
         textFlow.setPadding(new Insets(5, 10, 5, 10));
-
-        Text text = new Text(messageToServer);
+        Text user = new Text(words[0]);
+        user.setStyle("-fx-font-style: Italic; " +
+                "-fx-font-size: 10px; " +
+                "-fx-fill: rgb(147,147,147);");
+        Text text = new Text(words[1]);
+        hBox.getChildren().add(user);
         text.setFill(Color.color(0.934,0.945,0.966));
         textFlow.getChildren().add(text);
         hBox.getChildren().add(textFlow);

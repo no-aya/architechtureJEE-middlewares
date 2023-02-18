@@ -34,7 +34,7 @@ public class Client {
         try {
             writer.write(message);
             writer.newLine();
-            //writer.flush();
+            writer.flush();
         } catch (IOException e) {
             System.out.println("Error Sending Message...");
             e.printStackTrace();
@@ -46,6 +46,12 @@ public class Client {
             while (socket.isConnected()){
                 try {
                     String messageFromServer = reader.readLine();
+                    if (messageFromServer.startsWith("Welcome")){
+                        //TODO: Add Welcome Label
+                        InterfaceClient.addTitle(messageFromServer, vbox_message);
+                        continue;
+                    }
+                    System.out.println("Message From Server: "+messageFromServer);
                     InterfaceClient.addLabel(messageFromServer, vbox_message);
                 } catch (IOException e) {
                     e.printStackTrace();
