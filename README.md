@@ -8,5 +8,5 @@
 ## Activité Pratique N° 2 - Bases des systèmes distribués : Programmation Résaux
  - [Partie 1 : Application du support et vidéo](./ActivitePratique02/enset-systemes-distribuees)
  - [Partie 2 : Modèle Multi Threads Blocking IO (java.io)](./ActivitePratique02/MutiThreadChatServer)
- - [Partie 3 : Modèle Single Thread avec Non Blocking IO (java.nio)](./ActivitePratique02/MutiThreadNIOChat)
+ - [Partie 3 : Modèle Single Thread avec Non Blocking IO (java.nio)](./ActivitePratique02/SingleThreadNIOChat)
  - [Partie 4 : JMeeter pour tester les performances](./ActivitePratique02/README.md)
