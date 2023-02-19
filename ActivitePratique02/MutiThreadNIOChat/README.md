@@ -18,6 +18,9 @@ Les étapes du serveur sont les suivantes :
 * On ferme la socket.
 * On recommence.
 
+![nio-tutorial15](https://user-images.githubusercontent.com/106016869/219957646-a1a10472-1be1-40e9-866d-aea0912c69fc.png)
+
+
 ### Classe SoketServer 
 La classe contient les méthodes permettant de gérer les sockets non bloquantes. Elle contient les méthodes suivantes :
 * `public void start()` : Cette méthode permet de lancer le serveur.
@@ -165,14 +168,19 @@ Grâce au constructeur de la classe `SocketServer`, on peut lancer le serveur en
 
 Voici le résultat de l'exécution du serveur :
 
+![image](https://user-images.githubusercontent.com/106016869/219957709-31b25940-b585-471b-b26b-41ddca4d425d.png)
+
 ## Partie Client
 Nous allons reprendre le code du client de la partie précédente. Nous allons juste ajouter la possibilité de se connecter à un serveur.
 
 ### Client Telnet 
-
+![image](https://user-images.githubusercontent.com/106016869/219957762-b3856789-7e5b-4296-b64a-6516541151bd.png)
 
 ### Client JavaFX
+![image](https://user-images.githubusercontent.com/106016869/219957807-0752b91c-9844-41e2-b84e-39363d0834ec.png)
 
 ### Client Python
+![image](https://user-images.githubusercontent.com/106016869/219957876-b3192720-99e7-4425-b3b8-4d98e31554dc.png)
+
 
 
