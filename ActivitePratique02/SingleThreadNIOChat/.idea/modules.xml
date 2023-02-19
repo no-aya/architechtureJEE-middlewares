@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MutiThreadNIOChat.iml" filepath="$PROJECT_DIR$/MutiThreadNIOChat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SingleThreadNIOChat.iml" filepath="$PROJECT_DIR$/SingleThreadNIOChat.iml" />
     </modules>
   </component>
 </project>
