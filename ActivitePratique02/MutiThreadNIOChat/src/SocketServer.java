@@ -55,28 +55,27 @@ public class SocketServer {
         clientNumber++;
         System.out.println("Client connected from " + socketChannel.getRemoteAddress());
 
-        broadcast("Client " + clientNumber + " joined chat!", socketChannel);
+        broadcast("Client " + socketChannel.getRemoteAddress()  + " joined chat!"+System.lineSeparator(), socketChannel);
 
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         socketChannel.write(ByteBuffer.wrap("Welcome client ".getBytes()));
-        socketChannel.write(ByteBuffer.wrap(String.valueOf(clientNumber).getBytes()));
+
+        socketChannel.write(ByteBuffer.wrap(String.valueOf(socketChannel.getRemoteAddress()).getBytes()));
+        socketChannel.write(ByteBuffer.wrap(System.lineSeparator().getBytes()));
         //serverSocketChannel.register(this.selector, SelectionKey.OP_WRITE);
 
 
     }
 
-    private void read(SelectionKey key) {
+    private void read(SelectionKey key) throws IOException {
         SocketChannel socketChannel = (SocketChannel) key.channel();
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         int read = 0;
-        try {
-            read = socketChannel.read(buffer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        read = socketChannel.read(buffer);
         if (read == -1) {
             this.sessions.remove(socketChannel);
-            broadcast("Client " + clientNumber + " left chat!", socketChannel);
+
+            broadcast("Client " + socketChannel.getRemoteAddress() + " left chat!"+System.lineSeparator(), socketChannel);
             try {
                 socketChannel.close();
             } catch (IOException e) {
@@ -95,16 +94,37 @@ public class SocketServer {
         }
     }
 
-    private void broadcast(String message, SocketChannel sender) {
-        for (SocketChannel session : this.sessions) {
-            if (session == sender) continue;
-            ByteBuffer buffer = ByteBuffer.allocate(1024);
-            buffer.put(message.getBytes());
-            buffer.flip();
-            try {
-                session.write(buffer);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+    private void broadcast(String message, SocketChannel sender) throws IOException {
+        if (!message.contains("joined")) message = "Client " + sender.getRemoteAddress() + " > " + message;
+        if (message.contains("=>")) {
+            String[] parts = message.split("=>",2);
+            String[] receivers = parts[0].split(",");
+            for (SocketChannel session : this.sessions) {
+                for (String receiver : receivers) {
+                    if (session.getRemoteAddress().toString().equals("/"+receiver)) {
+                        ByteBuffer buffer = ByteBuffer.allocate(1024);
+                        buffer.put(parts[1].getBytes());
+                        buffer.flip();
+                        try {
+                            session.write(buffer);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
+
+        }else {
+            for (SocketChannel session : this.sessions) {
+                if (session == sender) continue;
+                ByteBuffer buffer = ByteBuffer.allocate(1024);
+                buffer.put(message.getBytes());
+                buffer.flip();
+                try {
+                    session.write(buffer);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
