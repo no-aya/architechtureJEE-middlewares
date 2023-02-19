@@ -50,4 +50,19 @@ Non-Blocking IO Server Test Results
 
 ![Screenshot 2023-02-19 145904](https://user-images.githubusercontent.com/106016869/219952991-db849aa7-06a5-4df8-a7b4-57a1a93ed439.png)
 
+Pour avoir une idée de la différence entre les deux serveurs, on effectue un test avec un nombre d'utilsateurs qui s'incrémente et on note les résultats. 
+
+| Users | Blocking IO   | Non-Blocking IO |
+|-------|---------------|-----------------|
+| 10/s  | 330.378 /min  | 376.152 /min    |
+| 50/s  | 2354.603 /min | 2324.68 /min    |
+| 60/s  | 1820.665 /min | 2858.958 /min   |
+
+## Conclusion
+On remarque que le serveur non-blocking est plus performant dès que le nombre d'utilisateurs augmente. 
+C'est dû au fait que le serveur non-blocking est capable de gérer plusieurs requêtes en même temps, 
+contrairement au serveur blocking qui ne peut gérer qu'une seule requête à la fois.
+
+
+
 
