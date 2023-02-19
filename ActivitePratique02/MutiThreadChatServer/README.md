@@ -132,6 +132,10 @@ On définit aussi un protocole pour la communication entre le client et le serve
         }
     }
 ```
+
+L'éxecution donne ceci :
+![image](https://user-images.githubusercontent.com/106016869/219961904-48d8eea9-7038-4f7f-9022-d8d83f39e860.png)
+
 ## Partie Client
 
 ### Client Telnet
@@ -176,10 +180,17 @@ public class MyTelnetClient {
 }
 ```
 
+L'exécution donne ceci :
+
+![image](https://user-images.githubusercontent.com/106016869/219961952-807bbbb3-e935-423e-a2ec-653afb4a178f.png)
+
 ### Client JavaFX
 On crée une interface graphique pour le client. On définit la classe `MyJFXClient.InterfaceClient` qui controle l'interface `interafceClient.xml`.
 
 Voici le désign de l'interface :
+
+![image](https://user-images.githubusercontent.com/106016869/219961981-de24874f-f073-4a8c-b9d0-d5854c6d1b47.png)
+
 
 Et voici le code de la classe `InterfaceClient` :
 
@@ -299,6 +310,10 @@ public class Main extends Application {
     }
 }
 ```
+On exécute et on obtient ceci
+
+![Screenshot 2023-02-19 174442](https://user-images.githubusercontent.com/106016869/219962216-e872b7e5-36b9-4b72-a3a7-4337ebadcff2.png)
+
 
 ### Client Python
 On crée un client en python simple qui se connecte au serveur Java. 
@@ -340,8 +355,11 @@ send_thread.start()
 ```
 On execute le script `client.py` dans un terminal avec la commande `python client.py`.
 
+![image](https://user-images.githubusercontent.com/106016869/219962270-51204d55-c825-4d7b-bdcb-46d34867bf7e.png)
 
 ## Demonstration
+
+https://user-images.githubusercontent.com/106016869/219962679-6d9fb48f-9e2d-4b23-b12b-1be48e4fa85c.mp4
 
 
 
