@@ -9,3 +9,4 @@
  - [Partie 1 : Modèle Multi Threads Blocking IO (java.io)](./ActivitePratique02/MutiThreadChatServer)
  - [Partie 2 : Modèle Single Thread avec Non Blocking IO (java.nio)](./ActivitePratique02/SingleThreadNIOChat)
  - [Partie 3 : JMeeter pour tester les performances](./ActivitePratique02/README.md)
+## Activité Pratique N° 3 - JPA Hibernate Spring Data
