@@ -10,3 +10,6 @@
  - [Partie 2 : Modèle Single Thread avec Non Blocking IO (java.nio)](./ActivitePratique02/SingleThreadNIOChat)
  - [Partie 3 : JMeeter pour tester les performances](./ActivitePratique02/README.md)
 ## Activité Pratique N° 3 - JPA Hibernate Spring Data
+ - [Partie 1 : Spring Boot - ORM avec Spring Data JPA | Gestion des patients](./ActivitePratique03/gestion-patients)
+ - [Partie 2 : Use case JPA, Hibernate Spring Data, One To Many, One To One | Gestion d'un hopital](./ActivitePratique03/hospital)
+ - [Partie 3 : Use case JPA, Hibernate Spring Data, Many To Many | Users-Roles](./ActivitePratique03/jpa-enset)
