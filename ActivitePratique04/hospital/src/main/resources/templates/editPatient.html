@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Patient</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Modifier le patient</h1>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Modifier le patient</div>
+        <div class="panel-body">
+            <form th:action="@{/updatePatient}" method="post" >
+                <input type="hidden" name="id" th:value="${patient.id}">
+                <label for="nom"> Nom : </label>
+                <input type="text" name="nom" id="nom" th:value="${patient.nom}">
+                <label for="dateNaissance">Date de naissance : </label>
+                <input type="date" name="dateNaissance" id="dateNaissance" th:value="${patient.dateNaissance}">
+                <label for="malade">Malade : </label>
+                <input type="checkbox" name="malade" id="malade" th:checked="${patient.malade}" value="true">
+                <div>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

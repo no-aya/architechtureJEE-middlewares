@@ -25,7 +25,7 @@ public class HospitalApplication {
     CommandLineRunner start(IHospitalService hospitalService,
                             PatientRepository patientRepository, MedecinRepository medecinRepository, RendezVousRepository rendezVousRepository, ConsultationRepository consultationRepository) {
         return args -> {
-            Stream.of("Abdelhami", "Benmalek", "Charssi", "Danblok").forEach(nom -> {
+            Stream.of("Abdelhami", "Benmalek", "Charssi", "Danblok","Abdeljalil", "Baraka", "Hanane", "Samir","Samira","Fakir","Fatiha").forEach(nom -> {
                 Patient p1 = new Patient();
                 p1.setNom(nom);
                 p1.setDateNaissance(new Date());
@@ -33,7 +33,7 @@ public class HospitalApplication {
                 hospitalService.savePatient(p1);
             });
 
-            Stream.of("Abdeljalil", "Baraka", "Hanane").forEach(nom -> {
+            Stream.of("Abdeljalil", "Baraka", "Hanane", "Samir","Samira","Fakir","Fatiha").forEach(nom -> {
                 Medecin m1 = new Medecin();
                 m1.setNom(nom);
                 m1.setEmail(nom.toLowerCase() + "@gmail.com");

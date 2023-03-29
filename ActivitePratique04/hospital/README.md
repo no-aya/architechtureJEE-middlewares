@@ -1,1 +1,7 @@
-# Use case JPA, Hibernate Spring Data, One To Many, One To One | Gestion d'un hopital
+# Gestion d'un hopital | Application Web
+
+## Description
+
+Nous allons reprendre le projet de gestion d'un hopital, puis nous allons le transformer en application web.
+
+
