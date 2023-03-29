@@ -13,7 +13,7 @@
  - [Partie 1 : Spring Boot - ORM avec Spring Data JPA | Gestion des patients](./ActivitePratique03/gestion-patients)
  - [Partie 2 : Use case JPA, Hibernate Spring Data, One To Many, One To One | Gestion d'un hopital](./ActivitePratique03/hospital)
  - [Partie 3 : Use case JPA, Hibernate Spring Data, Many To Many | Users-Roles](./ActivitePratique03/jpa-enset)
-## Activité Pratique N° 3 - Spring MVC JPA Hibernate Spring Data Thymeleaf
-
-## Activité Pratique N° 4 - Web service SOAP
+## Activité Pratique N° 4 - Spring MVC JPA Hibernate Spring Data Thymeleaf
+- [Gestion des patients](./ActivitePratique04/hospital/README.md)
+## Activité Pratique N° 5 - Web service SOAP
 - [Création d'un service web et client | SOAP](./ActivitePratique05/README.md)
