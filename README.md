@@ -17,3 +17,6 @@
 - [Gestion des patients](./ActivitePratique04/hospital/README.md)
 ## Activité Pratique N° 5 - Web service SOAP
 - [Création d'un service web et client | SOAP](./ActivitePratique05/README.md)
+## Activité Pratique N° 6 - Spring Security 
+- [Partie 1 : Authentification Statefull](./ActivitePratique06/hospital-app/README.md)
+- [Partie 2 : Authentification Statefull]()
