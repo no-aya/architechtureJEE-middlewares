@@ -23,6 +23,6 @@
 ## Activité Pratique N° 7 - Mise en oeuvre d'un micro-service
 - [Gestion des comptes bancaires](./ActivitéPratique07/bank-account-service/README.md)
 ## Contrôle n°1 JEE et Middlewares
-- [Contrôle Architecture JEE et Middlmeware | Durée : 3H00|](./Controle01/README.md)
+- [Contrôle Architecture JEE et Middlmeware | Durée : 3H00](./Controle01/README.md)
 
 
