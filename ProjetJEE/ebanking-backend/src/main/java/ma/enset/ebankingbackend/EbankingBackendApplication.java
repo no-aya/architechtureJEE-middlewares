@@ -107,9 +107,7 @@ public class EbankingBackendApplication {
                                 }
                                 try {
                                     bankAccountService.withdraw(bankAccount.getID(),Math.random() * 9000, "Withdraw of today no " + i);
-                                } catch (BankAccountNotFoundException e) {
-                                    throw new RuntimeException(e);
-                                } catch (InsufficientBalanceException e) {
+                                } catch (BankAccountNotFoundException | InsufficientBalanceException e) {
                                     throw new RuntimeException(e);
                                 }
                             }

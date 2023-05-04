@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../services/customer.service";
+import {catchError, map, Observable, throwError} from "rxjs";
+import {Customer} from "../model/customer.model";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-customers',
@@ -7,19 +10,50 @@ import {CustomerService} from "../services/customer.service";
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit{
-  customers: any;
+  customers$!: Observable<Array<Customer>>;
   errorMessage!: Object;
-  constructor(private customerService : CustomerService) {}
+  searchFormGroup!: FormGroup;
+  constructor(private customerService : CustomerService, private formBuilder : FormBuilder) {}
 
   ngOnInit(): void {
-    this.customerService.getCustomers().subscribe( {
-      next: data => {
-      this.customers = data;
-    },
-    error: error => {
-      this.errorMessage = error.message;
-    }
+    this.searchFormGroup = this.formBuilder.group({
+      keyword: this.formBuilder.control('')
     });
+    this.handleSearchCustomer();
   }
 
+  handleSearchCustomer() {
+    let keyword = this.searchFormGroup.get('keyword')?.value;
+    this.customers$ = this.customerService.searchCustomers(keyword).pipe(
+      catchError((err) => {
+        this.errorMessage = err.message;
+        return throwError(err.message)
+      })
+    );
+  }
+
+  handleEditCustomer(id: number) {
+
+  }
+
+  handleDeleteCustomer(id: number) {
+    let confirm = window.confirm("Are you sure you want to delete this customer?");
+    if (!confirm) return;
+    this.customerService.deleteCustomer(id).subscribe(
+      () => {
+        this.customers$=this.customers$.pipe(
+          map(data => {
+            let index = data.findIndex(customer => customer.id == id);
+            data.splice(index, 1);
+            return data;
+          })
+        );
+        this.handleSearchCustomer();
+      },
+      (err) => {
+        this.errorMessage = err.message;
+      }
+    )
+
+  }
 }

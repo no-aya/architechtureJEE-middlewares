@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="card col-md-6 offset-3 mt-3">
+    <div class="card-header">New Customer</div>
+    <div class="card-body">
+      <div *ngIf="message" class="alert alert-success">{{message}}</div>
+      <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+      <form [formGroup]="newCutomerFormGroup" (ngSubmit)="handleSaveCustomer()">
+        <div class="mb-3">
+          <label for="firstname" class="form-label">First Name : </label>
+          <input type="text" class="form-control" id="firstname" formControlName="firstName">
+          <span class="text-danger"
+                *ngIf="newCutomerFormGroup.controls['firstName'].invalid && newCutomerFormGroup.controls['firstName'].touched">First Name is required</span>
+        </div>
+        <div class="mb-3">
+          <label for="lastname" class="form-label">Last Name : </label>
+          <input type="text" class="form-control" id="lastname" formControlName="lastName">
+          <span class="text-danger"
+                *ngIf="newCutomerFormGroup.controls['lastName'].invalid && newCutomerFormGroup.controls['lastName'].touched">Last Name is required</span>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email : </label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <span class="text-danger"
+                *ngIf="newCutomerFormGroup.controls['email'].invalid && newCutomerFormGroup.controls['email'].touched">Email is required</span>
+        </div>
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Phone : </label>
+          <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber">
+          <span class="text-danger"
+                *ngIf="newCutomerFormGroup.controls['phoneNumber'].invalid && newCutomerFormGroup.controls['phoneNumber'].touched">Phone is required</span>
+        </div>
+        <div class="mb-3">
+          <button [disabled]="!newCutomerFormGroup.valid"  class="btn btn-primary mt-3">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

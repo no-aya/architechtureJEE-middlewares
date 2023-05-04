@@ -43,6 +43,12 @@ public class BankAccountServiceImpl implements BankAccountService{
     }
 
     @Override
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        log.info("Searching customers with keyword {}", keyword);
+        return customerRepository.findByFirstNameContainsOrLastNameContains(keyword,keyword).stream().map(dtoMapper::fromCustomerToCustomerDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public CurrentAccountDTO saveCurrentBankAccount(double balance, double overDraft, Long customerID) throws CustomerNotFoundException {
         log.info("Saving Current bank account with balance {}", balance);
         CurrentAccount bankAccount=new CurrentAccount();
