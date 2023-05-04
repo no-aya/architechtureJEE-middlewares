@@ -1,10 +1,12 @@
 package ma.enset.ebankingbackend;
 
+import ma.enset.ebankingbackend.dtos.CustomerDTO;
 import ma.enset.ebankingbackend.entities.*;
 import ma.enset.ebankingbackend.enums.AccountStatus;
 import ma.enset.ebankingbackend.enums.OperationType;
 import ma.enset.ebankingbackend.exceptions.BankAccountNotFoundException;
 import ma.enset.ebankingbackend.exceptions.InsufficientBalanceException;
+import ma.enset.ebankingbackend.mappers.BanKAccountMapperImpl;
 import ma.enset.ebankingbackend.repositories.AccountOperationRepository;
 import ma.enset.ebankingbackend.repositories.BankAccountRepository;
 import ma.enset.ebankingbackend.repositories.CustomerRepository;
@@ -21,6 +23,8 @@ import java.util.stream.Stream;
 
 @SpringBootApplication
 public class EbankingBackendApplication {
+
+    private BanKAccountMapperImpl dtoMapper=new BanKAccountMapperImpl();
 
     public static void main(String[] args) {
         SpringApplication.run(EbankingBackendApplication.class, args);
@@ -83,7 +87,7 @@ public class EbankingBackendApplication {
             return args -> {
                 Stream.of("Hassan", "Youssef", "Mohamed", "Abdellah", "Fatima", "Amina", "Sara", "Najat", "Hajar", "Naima")
                         .forEach(name -> {
-                            Customer customer = new Customer();
+                            CustomerDTO customer = new CustomerDTO();
                             customer.setFirstName(name);
                             customer.setLastName("EL KADIRI");
                             customer.setEmail(name + "@gmail.com");

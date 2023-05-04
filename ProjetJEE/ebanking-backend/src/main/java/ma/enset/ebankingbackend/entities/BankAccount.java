@@ -1,5 +1,6 @@
 package ma.enset.ebankingbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class BankAccount {
     @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)
     //LAZY: les opérations ne seront chargées que si on les demande
     //EAGER: les opérations seront chargées automatiquement
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<AccountOperation> accountOperations;
 
 }
