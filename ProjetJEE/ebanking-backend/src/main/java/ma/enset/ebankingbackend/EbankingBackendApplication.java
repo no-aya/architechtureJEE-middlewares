@@ -3,10 +3,14 @@ package ma.enset.ebankingbackend;
 import ma.enset.ebankingbackend.entities.*;
 import ma.enset.ebankingbackend.enums.AccountStatus;
 import ma.enset.ebankingbackend.enums.OperationType;
+import ma.enset.ebankingbackend.exceptions.BankAccountNotFoundException;
+import ma.enset.ebankingbackend.exceptions.InsufficientBalanceException;
 import ma.enset.ebankingbackend.repositories.AccountOperationRepository;
 import ma.enset.ebankingbackend.repositories.BankAccountRepository;
 import ma.enset.ebankingbackend.repositories.CustomerRepository;
 import ma.enset.ebankingbackend.services.BankAccountService;
+import ma.enset.ebankingbackend.services.BankAccountServiceImpl;
+import ma.enset.ebankingbackend.services.BankService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,12 +25,11 @@ public class EbankingBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(EbankingBackendApplication.class, args);
     }
-
+/*Tests
      CommandLineRunner start(AccountOperationRepository accountOperationRepository,
                              BankAccountRepository bankAccountRepository,
                              CustomerRepository customerRepository) {
         return args -> {
-            /**Test Data**/
             //Client : ID, firstName, lastName, email, phoneNumber, bankAccounts
             Stream.of("Hassan", "Youssef", "Mohamed", "Abdellah", "Fatima", "Amina", "Sara", "Najat", "Hajar", "Naima")
                     .forEach(name -> {
@@ -74,10 +77,44 @@ public class EbankingBackendApplication {
             });
         };
     }
+    */
     @Bean
     CommandLineRunner start(BankAccountService bankAccountService) {
             return args -> {
-                bankAccountService.consulter();
+                Stream.of("Hassan", "Youssef", "Mohamed", "Abdellah", "Fatima", "Amina", "Sara", "Najat", "Hajar", "Naima")
+                        .forEach(name -> {
+                            Customer customer = new Customer();
+                            customer.setFirstName(name);
+                            customer.setLastName("EL KADIRI");
+                            customer.setEmail(name + "@gmail.com");
+                            customer.setPhoneNumber("06 00 00 00 00");
+                            bankAccountService.saveCustomer(customer);
+                        });
+                bankAccountService.listCustomers().forEach(customer -> {
+                    try {
+                        bankAccountService.saveCurrentBankAccount(Math.random() * 9000, 1000, customer.getID());
+                        bankAccountService.saveSavingBankAccount(Math.random() * 9000, 3.5, customer.getID());
+                        bankAccountService.listBankAccounts().forEach(bankAccount -> {
+                            for (int i=0; i<10; i++) {
+                                try {
+                                    bankAccountService.deposit(bankAccount.getID(),Math.random() * 109000, "Deposit of today no " + i);
+                                } catch (BankAccountNotFoundException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                try {
+                                    bankAccountService.withdraw(bankAccount.getID(),Math.random() * 9000, "Withdraw of today no " + i);
+                                } catch (BankAccountNotFoundException e) {
+                                    throw new RuntimeException(e);
+                                } catch (InsufficientBalanceException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
             };
     }
 }
