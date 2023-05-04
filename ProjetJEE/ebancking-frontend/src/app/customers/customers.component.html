@@ -1,0 +1,33 @@
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-header">Customers</div>
+    <div class="alert alert-danger m-4" role="alert" *ngIf="errorMessage">
+      Something went wrong. Please try again later.
+      <br/>
+      <b>Error Message:</b> {{errorMessage|json}}
+    </div>
+    <div class="card-body"  *ngIf="customers">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of customers" >
+          <th scope="row">{{c.id}}</th>
+          <td>{{c.firstName}}</td>
+          <td>{{c.lastName}}</td>
+          <td>{{c.email}}</td>
+          <td>{{c.phoneNumber}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

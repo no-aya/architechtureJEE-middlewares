@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class CustomerRESTController {
     private BankAccountService bankAccountService;
 
@@ -31,4 +32,14 @@ public class CustomerRESTController {
     }
 
 
+    @PutMapping("/customers/{id}")
+    public CustomerDTO updateCustomer(@PathVariable Long id,@RequestBody CustomerDTO customerDTO) {
+        customerDTO.setID(id);
+        return bankAccountService.updateCustomer(customerDTO);
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public void deleteCustomer(@PathVariable Long id) throws CustomerNotFoundException {
+        bankAccountService.deleteCustomer(id);
+    }
 }
