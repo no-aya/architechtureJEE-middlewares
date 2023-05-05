@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {AccountsService} from "../services/accounts.service";
 import {catchError, Observable, throwError} from "rxjs";
 import {BankAccount} from "../model/account.model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-accounts',
@@ -14,14 +15,19 @@ export class AccountsComponent implements OnInit{
   currentPage:number = 0;
   size:number = 10;
   accountObservable$! : Observable<BankAccount>;
+  bankAccount!: BankAccount;
 
 
   operationFormGroup!:FormGroup;
   errorMessages!: string;
 
-  constructor(private formBuilder:FormBuilder, private accountService:AccountsService ) {}
+  constructor(private route : ActivatedRoute, private router : Router,private formBuilder:FormBuilder, private accountService:AccountsService ) {
+    this.bankAccount = this.router.getCurrentNavigation()?.extras.state as BankAccount;
+    this.accountObservable$= this.accountService.getAccount(this.bankAccount.id, this.currentPage, this.size);
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
+    //launch a search for the account received in the state
     this.accountFormGroup=this.formBuilder.group({
       accountNumber:this.formBuilder.control(null)
     })
@@ -35,8 +41,8 @@ export class AccountsComponent implements OnInit{
 
 
   handlerSearchAccount() {
-    let accountNumber = this.accountFormGroup.value.accountNumber;
-    this.accountObservable$ = this.accountService.getAccount(accountNumber, this.currentPage, this.size).pipe(
+    let accountId = this.accountFormGroup.value.accountNumber;
+    this.accountObservable$ = this.accountService.getAccount(accountId, this.currentPage, this.size).pipe(
       catchError((error) => {
         this.errorMessages = error.error.message;
         return throwError(error)

@@ -99,6 +99,7 @@ public class BankAccountServiceImpl implements BankAccountService{
     @Override
     public BankAccountDTO getBankAccount(String ID) throws BankAccountNotFoundException {
         BankAccount bankAccount=getBankAccountEntity(ID);
+        bankAccount.setAccountOperations(accountOperationRepository.findByBankAccount(bankAccount));
         if (bankAccount instanceof CurrentAccount)
             return dtoMapper.fromCurrentAccountToCurrentAccountDTO((CurrentAccount) bankAccount);
         else
@@ -222,6 +223,16 @@ public class BankAccountServiceImpl implements BankAccountService{
 
         }
 
-
+    @Override
+    public List<BankAccountDTO> getCustomerBankAccounts(Long id) throws CustomerNotFoundException {
+        Customer customer=customerRepository.findById(id).orElseThrow(()->new CustomerNotFoundException("Customer not found"));
+        List<BankAccount> bankAccounts=bankAccountRepository.findByCustomerID(id);
+        return bankAccounts.stream().map(bankAccount -> {
+            if (bankAccount instanceof CurrentAccount)
+                return dtoMapper.fromCurrentAccountToCurrentAccountDTO((CurrentAccount) bankAccount);
+            else
+                return dtoMapper.fromSavingAccountToSavingAccountDTO((SavingAccount) bankAccount);
+        }).collect(Collectors.toList());
+    }
 
 }

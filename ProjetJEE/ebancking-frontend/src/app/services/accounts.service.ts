@@ -15,8 +15,13 @@ export class AccountsService {
 
   }
 
-  public getAccount(accountId:number, page:number, size:number) {
+  public getAccount(accountId:String, page:number, size:number) {
     return this.http.get<BankAccount>(this.baseUrl+"/"+accountId+"/paged"+"?page="+page+"&size="+size);
+  }
+
+  public getBankAccount(accountId:String):Observable<BankAccount> {
+    ///bankAccounts/{ID}
+    return this.http.get<BankAccount>(this.baseUrl+"/"+accountId);
   }
 
   public debit(accountId:number, amount:number, description:string){

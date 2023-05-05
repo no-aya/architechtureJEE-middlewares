@@ -2,6 +2,7 @@ package ma.enset.ebankingbackend.web;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ma.enset.ebankingbackend.dtos.BankAccountDTO;
 import ma.enset.ebankingbackend.dtos.CustomerDTO;
 import ma.enset.ebankingbackend.exceptions.CustomerNotFoundException;
 import ma.enset.ebankingbackend.services.BankAccountService;
@@ -45,5 +46,10 @@ public class CustomerRESTController {
     @DeleteMapping("/customers/{id}")
     public void deleteCustomer(@PathVariable Long id) throws CustomerNotFoundException {
         bankAccountService.deleteCustomer(id);
+    }
+
+    @GetMapping("/customers/{id}/bankAccounts")
+    public List<BankAccountDTO> getCustomerBankAccounts(@PathVariable Long id) throws CustomerNotFoundException {
+        return bankAccountService.getCustomerBankAccounts(id);
     }
 }

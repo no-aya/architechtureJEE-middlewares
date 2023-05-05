@@ -33,10 +33,6 @@ export class CustomersComponent implements OnInit{
     );
   }
 
-  handleEditCustomer(id: number) {
-
-  }
-
   handleDeleteCustomer(id: number) {
     let confirm = window.confirm("Are you sure you want to delete this customer?");
     if (!confirm) return;
@@ -59,6 +55,6 @@ export class CustomersComponent implements OnInit{
   }
 
   handleCustomerAccounts(customer: Customer) {
-    this.router.navigateByUrl("/accounts/" + customer.id);
+    this.router.navigateByUrl("/accounts/" + customer.id, {state: customer});
   }
 }

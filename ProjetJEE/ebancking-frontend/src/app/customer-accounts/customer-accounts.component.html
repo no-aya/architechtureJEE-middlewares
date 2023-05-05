@@ -1,1 +1,34 @@
-<p>customer-accounts works!</p>
+<div class="container" xmlns="http://www.w3.org/1999/html">
+  <div class="card mt-4">
+    <div class="card-header">{{customer.firstName}} {{customer.lastName}}'s accounts (Client n° {{customer.id}})</div>
+    <ng-template #failure>
+      <div class="card-body">
+        <p class="card-text">No accounts found</p>
+      </div>
+    </ng-template>
+    <ng-container *ngIf="accounts$ | async as listAccounts; else failure">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let account of listAccounts">
+            <td>{{account.id}}</td>
+            <td>{{account.type}}</td>
+            <td>{{account.balance | number:'1.2-2'}} MAD</td>
+            <td>
+              <button class="btn btn-primary" (click)="handleAccount(account)">View</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+</div>
+</div>
