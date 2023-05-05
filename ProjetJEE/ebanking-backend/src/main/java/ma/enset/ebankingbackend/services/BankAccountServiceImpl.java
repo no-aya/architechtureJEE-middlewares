@@ -154,9 +154,9 @@ public class BankAccountServiceImpl implements BankAccountService{
     @Override
     public void transfer(String IDSource, String IDDestination, double amount) throws BankAccountNotFoundException, InsufficientBalanceException {
         //Debit the source account
-        deposit(IDSource,amount,"Transfer to "+IDDestination);
+        withdraw(IDSource,amount,"Transfer to "+IDDestination);
         //Credit the destination account
-        withdraw(IDDestination,amount,"Transfer from "+IDSource);
+        deposit(IDDestination,amount,"Transfer from "+IDSource);
 
     }
     @Override
@@ -200,7 +200,10 @@ public class BankAccountServiceImpl implements BankAccountService{
     @Override
     public AccountHistoryDTO accountOperationsHistory(String ID, int page, int size) throws BankAccountNotFoundException {
         BankAccount bankAccount = getBankAccountEntity(ID);
-        Page<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountID(ID, PageRequest.of(page, size));
+        //Page<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountID(ID, PageRequest.of(page, size));
+        //Order by date
+        Page<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountIDOrderByOperationDateDesc(ID, PageRequest.of(page, size));
+
         AccountHistoryDTO accountHistoryDTO = new AccountHistoryDTO();
         List<AccountOperationDTO>accountOperationsDTOs = accountOperations.getContent().stream().map(dtoMapper::fromAccountOperationToAccountOperationDTO).collect(Collectors.toList());
         accountHistoryDTO.setOperations(accountOperationsDTOs);
@@ -213,6 +216,7 @@ public class BankAccountServiceImpl implements BankAccountService{
         accountHistoryDTO.setTotalPages(accountOperations.getTotalPages());
         accountHistoryDTO.setCurrentPage(page);
         accountHistoryDTO.setSize(size);
+
 
         return accountHistoryDTO;
 

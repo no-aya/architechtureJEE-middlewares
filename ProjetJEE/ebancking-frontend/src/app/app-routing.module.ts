@@ -4,11 +4,13 @@ import {CustomersComponent} from "./customers/customers.component";
 import {AccountsComponent} from "./accounts/accounts.component";
 import {NewCustomerComponent} from "./new-customer/new-customer.component";
 import {environment} from "../environments/environment";
+import {CustomerAccountsComponent} from "./customer-accounts/customer-accounts.component";
 
 const routes: Routes = [
   { path: 'customers', component: CustomersComponent },
   { path: 'accounts', component: AccountsComponent},
   { path: 'new-customer', component: NewCustomerComponent},
+  { path: 'accounts/:id', component: CustomerAccountsComponent},
   ];
 
 @NgModule({
