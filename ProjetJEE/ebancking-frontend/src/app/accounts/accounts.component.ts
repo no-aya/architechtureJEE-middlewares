@@ -22,8 +22,10 @@ export class AccountsComponent implements OnInit{
   errorMessages!: string;
 
   constructor(private route : ActivatedRoute, private router : Router,private formBuilder:FormBuilder, private accountService:AccountsService ) {
-    this.bankAccount = this.router.getCurrentNavigation()?.extras.state as BankAccount;
-    this.accountObservable$= this.accountService.getAccount(this.bankAccount.id, this.currentPage, this.size);
+    if(this.router.getCurrentNavigation()?.extras.state){
+      this.bankAccount = this.router.getCurrentNavigation()?.extras.state as BankAccount;
+      this.accountObservable$= this.accountService.getAccount(this.bankAccount.id, this.currentPage, this.size);
+    }
   }
 
   ngOnInit(): void{

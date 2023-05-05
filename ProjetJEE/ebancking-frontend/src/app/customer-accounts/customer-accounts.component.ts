@@ -31,6 +31,6 @@ export class CustomerAccountsComponent {
   }
 
   handleAccount(account: BankAccount) {
-    this.router.navigateByUrl("/accounts", {state: account});
+    this.router.navigateByUrl("/admin/accounts", {state: account});
   }
 }
